@@ -1,0 +1,17 @@
+{
+  "name": "giu-foodtruck-backend-milestone3",
+  "version": "1.0.0",
+  "description": "Backend for GIU Food-Truck system - Milestone 3 (template)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "knex": "^2.5.1",
+    "pg": "^8.10.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1"
+  }
+}
