@@ -26,4 +26,7 @@ It includes table creation script, a sample Express/Knex backend with all requir
 ## Where to paste the Milestone 3 documentation (per PDF)
 Paste the milestone documentation in `milestoneBackend/README.md` (this README) and include `connectors/script.sql` inside `milestoneBackend/connectors/` as required by the assignment.
 
--- Prepared using the project PDF specification. fileciteturn0file0
+
+Note: seed.sql and verify.sql are located in the project root.
+
+
