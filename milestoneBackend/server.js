@@ -1,22 +1,37 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require("body-parser");
+const {handlePrivateBackendApi} = require('./routes/private/api');
+const {handlePublicBackendApi} = require('./routes/public/api');
+const {handlePublicFrontEndView} = require('./routes/public/view');
+const {handlePrivateFrontEndView} = require('./routes/private/view');
+const {authMiddleware} = require('./middleware/auth');
 require('dotenv').config();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
+
+// view engine setup
+app.set('views', './views');
+app.set('view engine', 'hjs');
+app.use(express.static('./public'));
+
+// Handle post requests
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
-// routers
-const menuItemRouter = require('./routes/menuItem');
-const trucksRouter = require('./routes/trucks');
-const cartRouter = require('./routes/cart');
-const orderRouter = require('./routes/order');
+handlePublicFrontEndView(app);
+handlePublicBackendApi(app);
+app.use(authMiddleware);
+handlePrivateFrontEndView(app);
+handlePrivateBackendApi(app);
 
-app.use('/api/v1/menuItem', menuItemRouter);
-app.use('/api/v1/trucks', trucksRouter);
-app.use('/api/v1/cart', cartRouter);
-app.use('/api/v1/order', orderRouter);
+app.listen(PORT, () => {
+    console.log(`Server is now listening at port ${PORT} on http://localhost:${PORT}/`);
+});
 
-app.get('/', (req, res) => res.json({message: 'GIU FoodTruck Backend Milestone 3 - Template'}));
 
-app.listen(port, () => console.log('Server running on port', port));
+
+
+
+
+
